@@ -1,0 +1,55 @@
+Logging to ckpts/pred_s_wp_c_wimage
+creating model and diffusion...
+Number of model parameters: 4984708
+COSINE
+creating data loader...
+training...
+loading train of crosscut...
+100%|██████████| 35000/35000 [00:00<00:00, 261309.68it/s]
+100%|██████████| 35000/35000 [00:00<00:00, 257400.93it/s]
+100%|██████████| 35000/35000 [00:00<00:00, 249779.47it/s]
+
+
+
+
+
+
+loading processed dataset...: 100%|██████████| 10000/10000 [00:12<00:00, 827.88it/s]
+Traceback (most recent call last):
+  File "/home/sjl/PuzzleFussion-main/scripts/image_train.py", line 126, in <module>
+    main()
+  File "/home/sjl/PuzzleFussion-main/scripts/image_train.py", line 83, in main
+    TrainLoop(
+  File "/home/sjl/PuzzleFussion-main/jigsawplan/train_util.py", line 148, in run_loop
+    self.run_step(batch, cond)
+  File "/home/sjl/PuzzleFussion-main/jigsawplan/train_util.py", line 167, in run_step
+    self.forward_backward(batch, cond)
+  File "/home/sjl/PuzzleFussion-main/jigsawplan/train_util.py", line 194, in forward_backward
+    losses = compute_losses()
+  File "/home/sjl/PuzzleFussion-main/jigsawplan/respace.py", line 96, in training_losses
+    return super().training_losses(self._wrap_model(model), *args, **kwargs)
+  File "/home/sjl/PuzzleFussion-main/jigsawplan/gaussian_diffusion.py", line 784, in training_losses
+    model_output_dec, _ = model(x_t, self._scale_timesteps(t), **model_kwargs)
+  File "/home/sjl/PuzzleFussion-main/jigsawplan/respace.py", line 128, in __call__
+    return self.model(x, new_ts, **kwargs)
+  File "/home/sjl/files/anaconda3/envs/Test3/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/sjl/files/anaconda3/envs/Test3/lib/python3.9/site-packages/torch/nn/parallel/distributed.py", line 1156, in forward
+    output = self._run_ddp_forward(*inputs, **kwargs)
+  File "/home/sjl/files/anaconda3/envs/Test3/lib/python3.9/site-packages/torch/nn/parallel/distributed.py", line 1110, in _run_ddp_forward
+    return module_to_run(*inputs[0], **kwargs[0])  # type: ignore[index]
+  File "/home/sjl/files/anaconda3/envs/Test3/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/sjl/PuzzleFussion-main/jigsawplan/transformer.py", line 203, in forward
+    out = layer(out, kwargs[f'self_mask'], kwargs[f'gen_mask'])
+  File "/home/sjl/files/anaconda3/envs/Test3/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/sjl/PuzzleFussion-main/jigsawplan/transformer.py", line 93, in forward
+    + self.dropout(self.gen_attn(x2, x2, x2, gen_mask))
+  File "/home/sjl/files/anaconda3/envs/Test3/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/sjl/PuzzleFussion-main/jigsawplan/transformer.py", line 73, in forward
+    scores = attention(q, k, v, self.d_k, mask, self.dropout)
+  File "/home/sjl/PuzzleFussion-main/jigsawplan/transformer.py", line 48, in attention
+    output = th.matmul(scores, v)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB (GPU 0; 11.90 GiB total capacity; 302.58 MiB already allocated; 66.75 MiB free; 310.00 MiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
